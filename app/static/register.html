@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>회원가입 · CRUD System</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="login-page">
+    <section class="login-card">
+      <div class="login-brand">
+        <div class="brand-mark">C</div>
+        <h1>새 계정 만들기</h1>
+        <p class="intro">CRUD System을 사용할 아이디와 비밀번호를 입력하세요.</p>
+      </div>
+      <form id="register-form">
+        <div class="form-grid">
+          <div class="field">
+            <label for="username">아이디</label>
+            <input id="username" name="username" minlength="3" maxlength="30"
+              pattern="[A-Za-z0-9_.-]+" placeholder="영문, 숫자, _, -, ." autocomplete="username" required>
+            <small class="field-help">3~30자의 영문, 숫자 및 _ - . 문자를 사용할 수 있습니다.</small>
+          </div>
+          <div class="field">
+            <label for="password">비밀번호</label>
+            <input id="password" name="password" minlength="8" maxlength="128"
+              placeholder="8자 이상 입력" type="password" autocomplete="new-password" required>
+          </div>
+          <div class="field">
+            <label for="password-confirm">비밀번호 확인</label>
+            <input id="password-confirm" minlength="8" maxlength="128"
+              placeholder="비밀번호 다시 입력" type="password" autocomplete="new-password" required>
+          </div>
+        </div>
+        <p id="error" class="error-text" role="alert"></p>
+        <button class="btn btn-primary" type="submit">가입하고 시작하기</button>
+      </form>
+      <p class="auth-switch">이미 계정이 있으신가요? <a href="/login">로그인</a></p>
+    </section>
+  </main>
+  <script>
+    const form = document.querySelector('#register-form');
+    const error = document.querySelector('#error');
+
+    fetch('/api/auth/me').then(response => {
+      if (response.ok) location.replace('/member');
+    });
+
+    function errorMessage(detail) {
+      if (typeof detail === 'string') return detail;
+      if (Array.isArray(detail)) return detail[0]?.msg || '입력값을 확인하세요.';
+      return '회원가입에 실패했습니다.';
+    }
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      error.textContent = '';
+      if (form.password.value !== document.querySelector('#password-confirm').value) {
+        error.textContent = '비밀번호가 서로 일치하지 않습니다.';
+        return;
+      }
+
+      const button = form.querySelector('button');
+      button.disabled = true;
+      try {
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            username: form.username.value.trim(),
+            password: form.password.value
+          })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(errorMessage(data.detail));
+        location.replace('/member');
+      } catch (err) {
+        error.textContent = err.message;
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

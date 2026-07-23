@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>외부 서비스 상태 · CRUD System</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="health-page">
+    <section class="health-card">
+      <div class="health-head">
+        <div>
+          <p class="health-eyebrow">PUBLIC SERVICE STATUS</p>
+          <h1>외부 서비스 상태</h1>
+          <p>인증 없이 FastAPI 애플리케이션과 MySQL 연결 상태를 확인합니다.</p>
+        </div>
+        <span id="status-code" class="status-code checking">확인 중</span>
+      </div>
+
+      <div class="health-grid">
+        <article class="health-item">
+          <span class="health-icon">API</span>
+          <div><small>FastAPI 서버</small><strong id="app-status">확인 중</strong></div>
+        </article>
+        <article class="health-item">
+          <span class="health-icon">DB</span>
+          <div><small>MySQL 데이터베이스</small><strong id="db-status">확인 중</strong></div>
+        </article>
+      </div>
+
+      <div class="health-meta">
+        <span>버전 <b id="health-version">-</b></span>
+        <span>마지막 확인 <b id="checked-at">-</b></span>
+      </div>
+
+      <div class="health-actions">
+        <button id="refresh-health" class="btn btn-primary" type="button">지금 다시 확인</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const labels = {ok: '정상', error: '연결 실패'};
+
+    async function checkHealth() {
+      const button = document.querySelector('#refresh-health');
+      const badge = document.querySelector('#status-code');
+      button.disabled = true;
+      badge.textContent = '확인 중';
+      badge.className = 'status-code checking';
+
+      try {
+        const response = await fetch('/health', {cache: 'no-store'});
+        const data = await response.json();
+        badge.textContent = data.http_status || `${response.status}`;
+        badge.className = `status-code ${response.ok ? 'healthy' : 'unhealthy'}`;
+        document.querySelector('#app-status').textContent = labels[data.app] || data.app;
+        document.querySelector('#db-status').textContent = labels[data.database] || data.database;
+        document.querySelector('#health-version').textContent = data.version || '-';
+      } catch (_) {
+        badge.textContent = '연결 실패';
+        badge.className = 'status-code unhealthy';
+        document.querySelector('#app-status').textContent = '응답 없음';
+        document.querySelector('#db-status').textContent = '확인 불가';
+      } finally {
+        document.querySelector('#checked-at').textContent = new Date().toLocaleString('ko-KR');
+        button.disabled = false;
+      }
+    }
+
+    document.querySelector('#refresh-health').addEventListener('click', checkHealth);
+    checkHealth();
+    setInterval(checkHealth, 30000);
+  </script>
+</body>
+</html>

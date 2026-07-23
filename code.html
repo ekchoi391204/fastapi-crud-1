@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CRUD System Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#ffb695",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#7b2f00",
+                    "primary-fixed": "#e2dfff",
+                    "inverse-on-surface": "#eff1f3",
+                    "secondary-container": "#d0e1fb",
+                    "surface": "#f7f9fb",
+                    "on-tertiary-fixed": "#351000",
+                    "inverse-surface": "#2d3133",
+                    "primary-container": "#4f46e5",
+                    "on-surface-variant": "#464555",
+                    "error": "#ba1a1a",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-primary-fixed": "#0f0069",
+                    "surface-container": "#eceef0",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#d3e4fe",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "background": "#f7f9fb",
+                    "outline": "#777587",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#c7c4d8",
+                    "on-primary-container": "#dad7ff",
+                    "tertiary-container": "#a44100",
+                    "on-secondary-container": "#54647a",
+                    "surface-tint": "#4d44e3",
+                    "tertiary": "#7e3000",
+                    "on-error": "#ffffff",
+                    "primary": "#3525cd",
+                    "on-tertiary-container": "#ffd2be",
+                    "inverse-primary": "#c3c0ff",
+                    "on-surface": "#191c1e",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#ffdbcc",
+                    "on-secondary-fixed": "#0b1c30",
+                    "surface-bright": "#f7f9fb",
+                    "surface-variant": "#e0e3e5",
+                    "secondary": "#505f76",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#d8dadc",
+                    "surface-container-low": "#f2f4f6",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "on-background": "#191c1e",
+                    "on-primary-fixed-variant": "#3323cc"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "2rem",
+                    "page-margin-desktop": "2.5rem",
+                    "gutter": "1.5rem",
+                    "container-max": "1280px",
+                    "stack-md": "1rem",
+                    "page-margin-mobile": "1rem",
+                    "stack-sm": "0.5rem"
+            },
+            "fontFamily": {
+                    "body-lg": ["Hanken Grotesk"],
+                    "body-sm": ["Hanken Grotesk"],
+                    "display-hero": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "code-sm": ["Geist"],
+                    "label-caps": ["Geist"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-hero": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "code-sm": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #F8FAFC;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+        }
+        .table-row-hover:hover {
+            background-color: #F1F5F9;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-lg text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-dim border-b border-outline-variant dark:border-outline fixed full-width top-0 z-50 w-full">
+<div class="flex justify-between items-center h-16 px-page-margin-desktop w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-gutter">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary cursor-pointer transition-all duration-200 active:opacity-70">CRUD System</span>
+<nav class="hidden md:flex items-center gap-stack-md font-body-lg text-body-lg">
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 cursor-pointer transition-all duration-200 active:opacity-70" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary transition-colors cursor-pointer transition-all duration-200 active:opacity-70" href="#">Users</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary transition-colors cursor-pointer transition-all duration-200 active:opacity-70" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center gap-stack-sm">
+<span class="font-code-sm text-code-sm bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full">Version 1.0.0</span>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-outline-variant cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a software engineer in a modern office environment. The lighting is soft and natural, emphasizing a clean and organized workspace. The image is high-contrast with a focus on professional reliability, using a muted blue and white color palette to match the system's indigo accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXp4o7m0W__mGKRmXGq5dorxd2g3B4Rp69UsSt4oC58qSgtCctXmelV_TbCLOzbxDlc3SwOp14wVA2QVJGMbuxrBMa6b1qKlf1cZlovrZD-EDQ4BqMNTtodC-EjRiYUY6v5xbkv03hB9bGCrxLHYG-SdDPRHnk2Cu0pqH4R7D7UnSmrtS9aTf6yyd8X32hTZFMYSuXyZGV6hNSSmgpwnss6yeZ0jrxbiyMf-ju8tLEEpg03OzAI6lBl1ufAQz08V4qZm01yRaTNf_3"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-12">
+<!-- Hero Section -->
+<section class="w-full max-w-container-max mx-auto px-page-margin-desktop mb-section-gap">
+<div class="bg-surface-container-lowest border-l-4 border-primary p-12 rounded-xl shadow-sm">
+<h1 class="font-display-hero text-display-hero text-on-surface mb-2">안녕하세요</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl">
+                    Welcome to the system dashboard. This environment is designed for precise CRUD (Create, Read, Update, Delete) operation testing and system monitoring.
+                </p>
+</div>
+</section>
+<!-- Main Content: User Management -->
+<section class="w-full max-w-container-max mx-auto px-page-margin-desktop">
+<div class="bg-white border border-outline-variant rounded-lg overflow-hidden shadow-sm">
+<!-- Table Header Actions -->
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<h2 class="font-headline-md text-headline-md text-on-surface">User Management</h2>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-4 py-2 rounded-lg font-body-lg hover:opacity-90 transition-opacity active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Add User</span>
+</button>
+</div>
+<!-- Table Content -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider">
+<th class="px-6 py-4 border-b border-outline-variant w-5/12">Name</th>
+<th class="px-6 py-4 border-b border-outline-variant w-2/12">Gender</th>
+<th class="px-6 py-4 border-b border-outline-variant w-2/12">Age</th>
+<th class="px-6 py-4 border-b border-outline-variant w-3/12 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-lg text-body-lg">
+<tr class="table-row-hover transition-colors border-b border-outline-variant">
+<td class="px-6 py-4 font-medium text-on-surface">홍길동</td>
+<td class="px-6 py-4 text-secondary">Male</td>
+<td class="px-6 py-4 text-secondary">25</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-stack-md">
+<button class="text-secondary hover:text-primary transition-colors active:scale-90 p-1" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-secondary hover:text-error transition-colors active:scale-90 p-1" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="table-row-hover transition-colors border-b border-outline-variant">
+<td class="px-6 py-4 font-medium text-on-surface">김철수</td>
+<td class="px-6 py-4 text-secondary">Male</td>
+<td class="px-6 py-4 text-secondary">32</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-stack-md">
+<button class="text-secondary hover:text-primary transition-colors active:scale-90 p-1" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-secondary hover:text-error transition-colors active:scale-90 p-1" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="table-row-hover transition-colors border-b border-outline-variant">
+<td class="px-6 py-4 font-medium text-on-surface">이영희</td>
+<td class="px-6 py-4 text-secondary">Female</td>
+<td class="px-6 py-4 text-secondary">28</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-stack-md">
+<button class="text-secondary hover:text-primary transition-colors active:scale-90 p-1" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-secondary hover:text-error transition-colors active:scale-90 p-1" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="table-row-hover transition-colors border-b border-outline-variant">
+<td class="px-6 py-4 font-medium text-on-surface">박지성</td>
+<td class="px-6 py-4 text-secondary">Male</td>
+<td class="px-6 py-4 text-secondary">40</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-stack-md">
+<button class="text-secondary hover:text-primary transition-colors active:scale-90 p-1" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-secondary hover:text-error transition-colors active:scale-90 p-1" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination/Status bar -->
+<div class="px-6 py-4 bg-surface-container-lowest border-t border-outline-variant flex justify-between items-center font-body-sm text-body-sm text-secondary">
+<span>Showing 4 users</span>
+<div class="flex gap-stack-sm">
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-surface-container transition-colors disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-surface-container transition-colors">Next</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-surface-container-highest border-t border-outline-variant dark:border-outline full-width bottom-0 w-full">
+<div class="flex justify-center items-center gap-gutter py-4 px-page-margin-desktop w-full mt-auto font-code-sm text-code-sm text-secondary dark:text-secondary-fixed-dim">
+<span class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                Server: Connected
+            </span>
+<span class="text-outline-variant">|</span>
+<span>IP: 192.168.1.1</span>
+<span class="text-outline-variant">|</span>
+<span>XFF: 10.0.0.1</span>
+<span class="text-outline-variant">|</span>
+<span class="font-body-sm">© 2024 System Monitor</span>
+</div>
+</footer>
+<script>
+        // Micro-interactions and focus handling
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    // Simple console log for demo purposes
+                    if(btn.title) console.log(`Action: ${btn.title}`);
+                });
+            });
+        });
+    </script>
+</body></html>

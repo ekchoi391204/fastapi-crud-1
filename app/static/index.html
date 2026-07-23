@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CRUD System Dashboard</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand"><span class="brand-mark">C</span><span>CRUD System</span></div>
+        <div class="nav-right">
+          <!-- 상단 표시 버전은 아래 텍스트를 직접 수정하세요. -->
+          <span id="version" class="version">Version 1.0.0</span>
+          <span id="avatar" class="avatar">A</span>
+          <button id="logout" class="btn btn-secondary">로그아웃</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="hero">
+        <p class="eyebrow">FastAPI · MySQL 8.0</p>
+        <h1><span id="welcome-name">관리자</span>님, 안녕하세요.</h1>
+        <p>사용자 데이터를 생성하고 조회하며 수정하거나 삭제할 수 있는 간단한 CRUD 테스트 환경입니다.</p>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div class="panel-title">
+            <h2>사용자 관리</h2>
+            <p>등록된 사용자 정보와 상태를 한곳에서 관리하세요.</p>
+          </div>
+          <div class="actions">
+            <label class="search">
+              <span>⌕</span>
+              <input id="search" type="search" placeholder="이름 검색" aria-label="이름 검색">
+            </label>
+            <button id="add" class="btn btn-primary">＋ 사용자 추가</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>이름</th><th>성별</th><th>나이</th><th style="text-align:right">작업</th></tr></thead>
+            <tbody id="people"></tbody>
+          </table>
+          <div id="empty" class="empty">조건에 맞는 사용자가 없습니다.</div>
+        </div>
+        <div class="panel-foot">총 <strong id="total">0</strong>명의 사용자</div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-status">
+          <i class="status-dot"></i>
+          <div><small>서버 상태</small><strong>Connected</strong></div>
+        </div>
+        <div class="footer-meta-card">
+          <small>서버명</small>
+          <strong id="server-name">-</strong>
+        </div>
+        <div class="footer-meta-card">
+          <small>클라이언트 IP</small>
+          <strong id="ip">-</strong>
+        </div>
+        <div class="footer-meta-card">
+          <small>X-Forwarded-For</small>
+          <strong id="xff">-</strong>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <form id="person-form" class="modal-card">
+      <h3 id="modal-title">사용자 추가</h3>
+      <input id="person-id" type="hidden">
+      <div class="form-grid">
+        <div class="field"><label for="name">이름</label><input id="name" maxlength="100" required></div>
+        <div class="field">
+          <label for="gender">성별</label>
+          <select id="gender" required><option value="Male">남성</option><option value="Female">여성</option></select>
+        </div>
+        <div class="field"><label for="age">나이</label><input id="age" type="number" min="0" max="150" required></div>
+      </div>
+      <div class="modal-actions">
+        <button id="cancel" class="btn btn-secondary" type="button">취소</button>
+        <button class="btn btn-primary" type="submit">저장</button>
+      </div>
+    </form>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
