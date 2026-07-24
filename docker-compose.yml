@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-frodo}
-      MYSQL_USER: ${MYSQL_USER:-crud_user}
+      MYSQL_USER: ${MYSQL_USER:-frodo}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-Frodo5020!!}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_password}
     command:
@@ -37,7 +37,7 @@ services:
       MYSQL_HOST: ${MYSQL_HOST:-mydb-svc}
       MYSQL_PORT: ${MYSQL_PORT:-3306}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-frodo}
-      MYSQL_USER: ${MYSQL_USER:-crud_user}
+      MYSQL_USER: ${MYSQL_USER:-frodo}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-Frodo5020!!}
       SERVER_NAME: ${SERVER_NAME:-crud-app}
       SERVER_IP: ${SERVER_IP:-}

@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     mysql_host: str = "mydb-svc"
     mysql_port: int = 3306
     mysql_database: str = "frodo"
-    mysql_user: str = "crud_user"
+    mysql_user: str = "frodo"
     mysql_password: str = "Frodo5020!!"
 
     admin_username: str = "admin"
