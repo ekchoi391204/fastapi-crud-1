@@ -218,7 +218,8 @@ def me(account: Account = Depends(current_account)) -> dict[str, str | int]:
 
 
 @app.get("/api/people", response_model=PersonList, include_in_schema=False)
-@app.get("/api/member", response_model=PersonList)
+@app.get("/api/member", response_model=PersonList, include_in_schema=False)
+@app.get("/api/members", response_model=PersonList)
 def list_people(
     q: str = Query(default="", max_length=100),
     account: Account = Depends(current_account),
@@ -246,6 +247,12 @@ def list_people(
     "/api/member",
     response_model=PersonResponse,
     status_code=status.HTTP_201_CREATED,
+    include_in_schema=False,
+)
+@app.post(
+    "/api/members",
+    response_model=PersonResponse,
+    status_code=status.HTTP_201_CREATED,
 )
 def create_person(
     payload: PersonCreate,
@@ -268,11 +275,16 @@ def get_person_or_404(person_id: int, db: Session) -> Person:
 
 
 @app.put(
+    "/api/member/{person_id}",
+    response_model=PersonResponse,
+    include_in_schema=False,
+)
+@app.put(
     "/api/people/{person_id}",
     response_model=PersonResponse,
     include_in_schema=False,
 )
-@app.put("/api/member/{person_id}", response_model=PersonResponse)
+@app.put("/api/members/{person_id}", response_model=PersonResponse)
 def update_person(
     person_id: int,
     payload: PersonUpdate,
@@ -289,11 +301,16 @@ def update_person(
 
 
 @app.delete(
+    "/api/member/{person_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    include_in_schema=False,
+)
+@app.delete(
     "/api/people/{person_id}",
     status_code=status.HTTP_204_NO_CONTENT,
     include_in_schema=False,
 )
-@app.delete("/api/member/{person_id}", status_code=status.HTTP_204_NO_CONTENT)
+@app.delete("/api/members/{person_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_person(
     person_id: int,
     account: Account = Depends(current_account),

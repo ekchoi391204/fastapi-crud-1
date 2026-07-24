@@ -25,7 +25,7 @@ docker compose up --build -d
 - API 문서: <http://localhost:8080/docs>
 - 회원가입: <http://localhost:8080/register>
 - 사용자 관리: <http://localhost:8080/member>
-- 사용자 CRUD API: <http://localhost:8080/api/member>
+- 사용자 CRUD API: <http://localhost:8080/api/members>
 - 외부 상태 페이지: <http://localhost:8080/status>
 - 헬스 API: <http://localhost:8080/health>
 

@@ -51,7 +51,7 @@ function render() {
 }
 
 async function loadPeople() {
-  const data = await api(`/api/member?q=${encodeURIComponent($('#search').value.trim())}`);
+  const data = await api(`/api/members?q=${encodeURIComponent($('#search').value.trim())}`);
   state.people = data.items;
   state.total = data.total;
   render();
@@ -106,7 +106,7 @@ $('#people').addEventListener('click', async event => {
   if (button.dataset.action === 'edit') return openModal(person);
   if (!confirm(`"${person.name}" 사용자를 삭제하시겠습니까?`)) return;
   try {
-    await api(`/api/member/${id}`, {method: 'DELETE'});
+    await api(`/api/members/${id}`, {method: 'DELETE'});
     toast('사용자를 삭제했습니다.');
     await loadPeople();
   } catch (error) { toast(error.message, true); }
@@ -121,7 +121,7 @@ $('#person-form').addEventListener('submit', async event => {
     age: Number($('#age').value)
   };
   try {
-    await api(id ? `/api/member/${id}` : '/api/member', {
+    await api(id ? `/api/members/${id}` : '/api/members', {
       method: id ? 'PUT' : 'POST',
       body: JSON.stringify(payload)
     });
