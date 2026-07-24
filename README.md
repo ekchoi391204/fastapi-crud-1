@@ -52,7 +52,7 @@ docker build -t hifrodo/crud-db:1.0 .\db
 `.env.example`을 `.env`로 복사한 뒤 값을 변경할 수 있습니다. 기본 DB 이름은
 `frodo`, 기본 DB 사용자는 `frodo`, 기본 DB 사용자 비밀번호는 `Frodo5020!!`이며 컨테이너 내부 DB 호스트는
 Compose 서비스 이름인 `mydb-svc`입니다.
-대시보드 하단에 표시되는 서버명은 `SERVER_NAME`으로 변경할 수 있습니다.
+대시보드 하단의 서버명은 실행 중인 컨테이너 호스트명을 자동으로 표시합니다.
 서버 IP는 자동 감지되며 외부 IP를 직접 표시하려면 `SERVER_IP`에 지정합니다.
 
 대시보드 상단 표시 버전은 `app/static/index.html`에서 직접 수정합니다.

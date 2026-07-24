@@ -39,7 +39,6 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-frodo}
       MYSQL_USER: ${MYSQL_USER:-frodo}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-Frodo5020!!}
-      SERVER_NAME: ${SERVER_NAME:-crud-app}
       SERVER_IP: ${SERVER_IP:-}
       SECRET_KEY: ${SECRET_KEY:-change-this-secret-key-before-production}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES:-60}

@@ -317,7 +317,7 @@ def system_meta(
     except OSError:
         detected_server_ip = "-"
     return {
-        "server_name": settings.server_name,
+        "server_name": socket.gethostname(),
         "server_ip": settings.server_ip or detected_server_ip,
         "version": settings.app_version,
         "ip": client_ip,
