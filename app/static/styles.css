@@ -82,12 +82,9 @@ tbody tr:hover { background: #f8fafc; }
   background: #1e293b; box-shadow: 0 -8px 24px rgba(15,23,42,.16);
 }
 .footer-inner { padding: 18px 28px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; color: #e2e8f0; }
-.footer-status, .footer-meta-card { min-width: 0; padding: 16px 18px; background: #0f172a; border: 1px solid #475569; border-radius: 11px; }
-.footer-status { display: flex; align-items: center; gap: 12px; }
-.footer-status small, .footer-meta-card small { display: block; margin-bottom: 6px; color: #cbd5e1; font: 700 13px Consolas, monospace; letter-spacing: .05em; text-transform: uppercase; }
-.footer-status strong, .footer-meta-card strong { display: block; overflow: hidden; color: #ffffff; font: 800 19px Consolas, monospace; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
-.footer-status strong { color: #34d399; }
-.status-dot { width: 12px; height: 12px; flex: 0 0 auto; display: inline-block; background: var(--success); border-radius: 50%; box-shadow: 0 0 0 5px rgba(5,150,105,.12); }
+.footer-meta-card { min-width: 0; padding: 16px 18px; background: #0f172a; border: 1px solid #475569; border-radius: 11px; }
+.footer-meta-card small { display: block; margin-bottom: 6px; color: #cbd5e1; font: 700 13px Consolas, monospace; letter-spacing: .05em; text-transform: uppercase; }
+.footer-meta-card strong { display: block; overflow: hidden; color: #ffffff; font: 800 19px Consolas, monospace; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
 .modal { position: fixed; inset: 0; z-index: 20; background: rgba(15,23,42,.5); display: none; place-items: center; padding: 20px; }
 .modal.open { display: grid; }
 .modal-card { width: min(440px, 100%); background: white; padding: 26px; border-radius: 14px; box-shadow: 0 24px 60px rgba(15,23,42,.25); }
@@ -146,7 +143,7 @@ tbody tr:hover { background: #f8fafc; }
   .row-actions { text-align: left; margin-top: 5px; }
   .footer { position: static; }
   .footer-inner { grid-template-columns: 1fr; padding: 16px; }
-  .footer-status strong, .footer-meta-card strong { font-size: 18px; white-space: normal; overflow-wrap: anywhere; }
+  .footer-meta-card strong { font-size: 18px; white-space: normal; overflow-wrap: anywhere; }
   .health-card { padding: 25px 20px; }
   .health-head { flex-direction: column; }
   .health-grid { grid-template-columns: 1fr; }

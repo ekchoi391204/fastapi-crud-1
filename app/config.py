@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     app_name: str = "CRUD System"
     app_version: str = "1.0.0"
     server_name: str = "crud-app"
+    server_ip: str = ""
     secret_key: str = "change-this-secret-key-before-production"
     access_token_expire_minutes: int = 60
     cookie_secure: bool = False

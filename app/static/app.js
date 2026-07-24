@@ -77,6 +77,7 @@ async function initialize() {
     const [account, meta] = await Promise.all([api('/api/auth/me'), api('/api/system/meta')]);
     $('#welcome-name').textContent = account.username;
     $('#avatar').textContent = account.username[0].toUpperCase();
+    $('#server-ip').textContent = meta.server_ip || '감지 실패';
     $('#server-name').textContent = meta.server_name;
     $('#ip').textContent = meta.ip;
     $('#xff').textContent = meta.xff;

@@ -1,4 +1,5 @@
 import time
+import socket
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -311,8 +312,13 @@ def system_meta(
 ) -> dict[str, str]:
     del account
     client_ip = request.client.host if request.client else "-"
+    try:
+        detected_server_ip = socket.gethostbyname(socket.gethostname())
+    except OSError:
+        detected_server_ip = "-"
     return {
         "server_name": settings.server_name,
+        "server_ip": settings.server_ip or detected_server_ip,
         "version": settings.app_version,
         "ip": client_ip,
         "xff": request.headers.get("x-forwarded-for", "-"),
