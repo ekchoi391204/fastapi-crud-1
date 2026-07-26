@@ -11,7 +11,7 @@ FastAPI와 MySQL 8.0으로 구성한 로그인 기반 사용자 CRUD 예제입�
 `db/Dockerfile`로 빌드됩니다. DB 초기 스키마와 샘플 데이터는
 `db/init.sql`에 정의되어 있습니다.
 
-## 실행
+## 실행 (파워쉘 기준)
 
 ```powershell
 Copy-Item .env.example .env
